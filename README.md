@@ -72,15 +72,8 @@ You may use any one of the following:
 
   
 
+# How to create splunk dashboard
 
- 
-
-![Uploading image.png…]()
-
-
-Download Splunk Free or Splunk Enterprise Trial
-
-Start Splunk Web Interface: http://localhost:8000
 
 2️⃣ Upload Logs
 
