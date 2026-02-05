@@ -137,11 +137,11 @@ Go to Settings → Add Data → Upload
 
 - Assign a source type (e.g., linux_secure, WinEventLog:Security)
 
-![image]()
-![image]()
-![image]()
-![image]()
-![image]()
+![image](https://github.com/NATTOMR/Task_12-Log-Monitoring-Analysis-by-using-splunk/blob/main/images/new%20dashboard-1.jpeg)
+![image](https://github.com/NATTOMR/Task_12-Log-Monitoring-Analysis-by-using-splunk/blob/main/images/new%20dashboard-2.jpeg)
+![image](https://github.com/NATTOMR/Task_12-Log-Monitoring-Analysis-by-using-splunk/blob/main/images/new%20dashboard-3.jpeg)
+![image](https://github.com/NATTOMR/Task_12-Log-Monitoring-Analysis-by-using-splunk/blob/main/images/new%20dashboard-4.jpeg)
+![image](https://github.com/NATTOMR/Task_12-Log-Monitoring-Analysis-by-using-splunk/blob/main/images/new%20dashboard-5.jpeg)
 
 # 🔎 Analysis Tasks (Step-by-Step)
  1️⃣ Understand Log Types
