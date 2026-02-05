@@ -68,7 +68,7 @@ You may use any one of the following:
     `sudo /opt/splunk/bin/splunk status`
 
 
-
+![image](https://github.com/NATTOMR/Task_12-Log-Monitoring-Analysis-by-using-splunk/blob/main/images/splunk%20dashboard.png)
 
   
 
