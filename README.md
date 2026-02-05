@@ -1,5 +1,6 @@
 
 # 🔍 Splunk Log Analysis & Incident Detection Project
+
 # 📌 Project Overview
 
 This project focuses on log analysis and incident detection using Splunk only. The goal is to simulate a real-world SOC (Security Operations Center) task where logs are ingested, analyzed, correlated, and turned into actionable security insights.
@@ -45,15 +46,14 @@ You may use any one of the following:
 1️⃣ Install Splunk
 
 1. Download link
-   `https://www.splunk.com/en_us/download/previous-releases.html`
+   - `https://www.splunk.com/en_us/download/previous-releases.html`
    
 3. 1️⃣ Download Splunk (Linux .deb)
-    `wget -O splunk-9.2.4-c103a21bb11d-linux-2.6-amd64.deb "https://download.splunk.com/products/splunk/releases/9.2.4/linux/splunk-9.2.4-c103a21bb11d-linux-2.6-amd64.deb"`
+   -  `wget -O splunk-9.2.4-c103a21bb11d-linux-2.6-amd64.deb "https://download.splunk.com/products/splunk/releases/9.2.4/linux/splunk-9.2.4-c103a21bb11d-linux-2.6-amd64.deb"`
    
 5. 2️⃣ Install Splunk
    `sudo dpkg -i splunk.deb`
-   - If you get dependency errors:
-      - `sudo apt --fix-broken install -y`
+   - If you get dependency errors: `sudo apt --fix-broken install -y`
 
 6. 3️⃣ Start Splunk
  `sudo /opt/splunk/bin/splunk start`
