@@ -248,7 +248,7 @@ Example: Alert for multiple failed logins.
 - Action: Log event / Email (optional)
 
 # 📊 Final Dashboard Output
-![image]()
+![image](https://github.com/NATTOMR/Task_12-Log-Monitoring-Analysis-by-using-splunk/blob/main/images/splung%20dashboard.jpeg)
 # 📄 Deliverables
 
 # ✅ Log Analysis Report
@@ -276,4 +276,42 @@ By completing this project, you gain:
 - Incident detection skills
 
 - SIEM fundamentals
+
+---
+
+## 👤 Author
+
+**Natto Muni Chakma**  
+B.Tech (Computer Science & Engineering)  
+Cybersecurity & SIEM Enthusiast  
+
+- 💻 Interested in Security Operations Center (SOC)
+- 🔍 Log Analysis & Incident Detection
+- 🛡️ SIEM, Splunk, Network & System Security
+
+📫 GitHub: https://github.com/NATTOMR  
+
+---
+
+## 📚 References
+
+1. **Splunk Official Documentation**  
+   https://docs.splunk.com
+
+2. **Splunk Search Processing Language (SPL) Reference**  
+   https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/WhatsInThisManual
+
+3. **Splunk Dashboard Studio Guide**  
+   https://docs.splunk.com/Documentation/Splunk/latest/DashStudio/AboutDashboardStudio
+
+4. **Linux Authentication Logs (auth.log)**  
+   https://man7.org/linux/man-pages/man5/syslog.conf.5.html
+
+5. **SOC & SIEM Concepts**  
+   https://www.splunk.com/en_us/solutions/siem.html
+
+6. **MITRE ATT&CK Framework (Attack Techniques Reference)**  
+   https://attack.mitre.org
+
+---
 
