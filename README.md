@@ -77,6 +77,7 @@ You may use any one of the following:
 
 2️⃣ Upload Logs
 
+<<<<<<< HEAD
 Go to Settings → Add Data → Upload
 
 Select log files
@@ -106,6 +107,37 @@ index=main | stats count by sourcetype
 2️⃣ Analyze Authentication Logs
 
 Focus on login-related events.
+=======
+- Go to Settings → Add Data → Upload
+
+- Select log files
+
+- Assign a source type (e.g., linux_secure, WinEventLog:Security)
+
+Index: main
+
+# 🔎 Analysis Tasks (Step-by-Step)
+ 1️⃣ Understand Log Types
+
+### Identify fields such as:
+
+- user
+
+- src_ip
+
+- action
+
+- status
+
+- EventCode
+
+1. Example SPL:
+
+`index=main | stats count by sourcetype`
+2. 2️⃣ Analyze Authentication Logs
+
+`Focus on login-related events.`
+>>>>>>> 2d12d3007859112b25b31432091bb1a6e7faa2d5
 
 index=main (login OR authentication)
 3️⃣ Identify Failed Logins
