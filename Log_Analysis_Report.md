@@ -31,27 +31,16 @@ This report documents a comprehensive log monitoring, SIEM analysis, and threat 
 
 The monitoring infrastructure was deployed using Splunk Enterprise on a Kali Linux SOC analyst workstation. The system topology ingests log feeds from target endpoints, processes sourcetypes, indexes event timestamps, and renders dashboards.
 
-```
-┌────────────────────────────────────────────────────────┐
-│             Target Infrastructure / Endpoints          │
-│   Linux Hosts (auth.log) / SSH Jump Servers / Datasets │
-└───────────────────────────┬────────────────────────────┘
-                            │ (Log Telemetry / JSON Feed)
-                            ▼
-┌────────────────────────────────────────────────────────┐
-│            Splunk Ingestion & Indexing Engine           │
-│   • Index: main                                        │
-│   • Sourcetype: _json / linux_secure                   │
-└───────────────────────────┬────────────────────────────┘
-                            │ (SPL Query Execution)
-                            ▼
-┌────────────────────────────────────────────────────────┐
-│             Splunk Security Dashboard (Web UI)         │
-│   • Real-Time Threat Alerts                            │
-│   • Auth Summary Metrics                               │
-│   • Top Attacker IP Geolocation / Charts               │
-└────────────────────────────────────────────────────────┘
-```
+![Lab Architecture](Lab%20Architecture.jpg)
+
+### Architecture Layer Breakdown:
+
+| Infrastructure Layer | Component Specification | Functional Role in SOC Workflow |
+| :--- | :--- | :--- |
+| **Endpoint Telemetry** | Linux Hosts (`auth.log`) / `ssh_logs (1).json` | Generates real-time SSH authentication and TCP session logs |
+| **Ingestion Engine** | Splunk Enterprise (`v9.2.4`) on Kali Linux | Parses JSON key-value pairs, indexes timestamps into `index=main` |
+| **SIEM Processing** | Search Processing Language (SPL) | Executes anomaly detection, event correlation, and alerting logic |
+| **SOC Visualization** | Splunk Web Interface (`http://localhost:8000`) | Renders executive security dashboards, threat maps, and alerts |
 
 ### Lab Component Specifications:
 - **Operating System:** Kali Linux x86_64
@@ -81,19 +70,14 @@ The dataset `ssh_logs (1).json` contains high-density network and authentication
 | `auth_attempts`| Integer | Total password attempts in connection | `1`, `3`, `5` |
 
 ### Telemetry Categorization Breakdown:
-```
-Event Type Categorization
-┌─────────────────────────────────────────────────┬───────┬──────────┐
-│ Event Type                                      │ Count │ % Share  │
-├─────────────────────────────────────────────────┼───────┼──────────┤
-│ Successful SSH Login                            │  306  │  25.50%  │
-│ Failed SSH Login                                │  305  │  25.42%  │
-│ Multiple Failed Authentication Attempts         │  303  │  25.25%  │
-│ Connection Without Authentication               │  286  │  23.83%  │
-├─────────────────────────────────────────────────┼───────┼──────────┤
-│ TOTAL                                           │ 1200  │ 100.00%  │
-└─────────────────────────────────────────────────┴───────┴──────────┘
-```
+
+| Event Type Categorization | Count | % Share | Threat Assessment & Context |
+| :--- | :---: | :---: | :--- |
+| **Successful SSH Login** | 306 | 25.50% | Authorized user session verified on destination host |
+| **Failed SSH Login** | 305 | 25.42% | Single authentication failure (wrong credential/user) |
+| **Multiple Failed Authentication Attempts** | 303 | 25.25% | High-risk brute-force password guessing pattern |
+| **Connection Without Authentication** | 286 | 23.83% | Port 22 scanner probe closing before handshake |
+| **TOTAL VOLUME ANALYZED** | **1200** | **100.00%** | Complete Ingested SSH Telemetry Feed |
 
 ---
 
@@ -160,28 +144,15 @@ index=main
 
 ## 5. Security Incident Findings & Threat Intelligence Synthesis
 
-Based on log correlations, two major security incident patterns were identified:
+Based on log correlations, two major security incident patterns were identified across the network:
 
-```
-                  ┌──────────────────────────────┐
-                  │    Attacker IP: 10.0.0.25    │
-                  └──────────────┬───────────────┘
-                                 │
-         ┌───────────────────────┴───────────────────────┐
-         │                                               │
-         ▼                                               ▼
-┌───────────────────────────────┐               ┌───────────────────────────────┐
-│  Unauthenticated Recon Scan   │               │   Brute-Force Attack Burst    │
-│  (286 Port 22 Probes)         │               │   (303 Multi-Fail Events)     │
-└────────┬──────────────────────┘               └────────┬──────────────────────┘
-         │                                               │
-         └───────────────────────┬───────────────────────┘
-                                 │
-                                 ▼
-                ┌─────────────────────────────────┐
-                │  Target SSH Nodes: 10.0.1.2/6   │
-                └─────────────────────────────────┘
-```
+### Threat Execution Matrix:
+
+| Incident Stage | Threat Actor Origin | Target Infrastructure | Observed Attack Pattern | Risk Severity |
+| :--- | :--- | :--- | :--- | :--- |
+| **Stage 1: Reconnaissance** | Subnet `10.0.0.0/24` | Target Nodes (`10.0.1.2/6`) | 286 unauthenticated Port 22 banner probes | **MEDIUM** |
+| **Stage 2: Brute Force** | Primary Attacker (`10.0.0.25`) | SSH Server Farm (`10.0.1.6`) | 303 multi-attempt password spray bursts | **HIGH** |
+| **Stage 3: Account Exposure** | Offending IPs (`10.0.0.18/25/46`) | Jump Hosts (`10.0.1.2/9`) | Failed logins preceding successful authentication | **CRITICAL** |
 
 ### Incident 1: Distributed SSH Password Spraying & Brute Force
 - **Attacker Profile:** Source IPs `10.0.0.25`, `10.0.0.18`, `10.0.0.46`, `10.0.0.22`, `10.0.0.48`.
@@ -199,12 +170,17 @@ Based on log correlations, two major security incident patterns were identified:
 
 To visualize security telemetry for real-time monitoring, a dedicated **Kali Security Dashboard** was configured in Splunk.
 
+![Splunk Security Dashboard](images/splung%20dashboard.jpeg)
+
 ### Visual Dashboard Panels:
-1. **Total Authentication Events (Single Value Panel):** Displays real-time total count of processed SSH events (1,200).
-2. **Authentication Result Breakdown (Pie Chart):** Visualizes the proportion of successful vs. failed vs. unauthenticated attempts.
-3. **Top Failed Login Sources (Bar Chart):** Ranks the top originating IP addresses causing authentication failures.
-4. **Target Destination Distribution (Column Chart):** Maps inbound SSH traffic volume across internal destination servers.
-5. **Timechart Trend Analysis (Line Chart):** Tracks event velocity over time to spot sudden attack spikes.
+
+| Panel # | Dashboard Panel Title | Visual Component | Detailed Description & Query Focus |
+| :---: | :--- | :--- | :--- |
+| **01** | Total Authentication Events | Single Value Metric | Displays real-time count of total processed SSH events (1,200) |
+| **02** | Auth Status Breakdown | Donut / Pie Chart | Visualizes proportion of successful vs. failed vs. unauthenticated sessions |
+| **03** | Top Failed Login Sources | Horizontal Bar Chart | Ranks top originating IP addresses causing authentication failures |
+| **04** | Target Load Distribution | Vertical Column Chart | Maps inbound SSH traffic volume across internal destination servers |
+| **05** | Timechart Event Velocity | Line Trend Chart | Tracks event velocity over time to spot sudden attack spikes |
 
 ---
 
@@ -307,4 +283,3 @@ The following technical Q&A addresses foundational concepts required for cyberse
 This project demonstrated full lifecycle SIEM implementation using Splunk Enterprise—from installing Splunk on Kali Linux, ingesting 1,200 structured SSH JSON logs, authoring threat-hunting SPL queries, building custom dashboards, establishing alerting rules, and drafting actionable threat intelligence.
 
 **Report Compiled By:** NATTOMR
-   
