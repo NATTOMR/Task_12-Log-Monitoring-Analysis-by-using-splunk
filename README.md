@@ -1,309 +1,211 @@
-
 # 🔍 Splunk Log Analysis & Incident Detection Project
 
-# 📌 Project Overview
+![Banner](banner.png)
 
-This project focuses on log analysis and incident detection using Splunk only. The goal is to simulate a real-world SOC (Security Operations Center) task where logs are ingested, analyzed, correlated, and turned into actionable security insights.
-
-By completing this project, you will demonstrate hands-on experience with Splunk fundamentals, SIEM concepts, and security monitoring — ideal for a cybersecurity portfolio.
-
-# 🎯 Objectives
-- How to install splunk in kali
-- How to create splunk dashboard
-- Learn SIEM fundamentals using Splunk
-- Understand different log types
-- Analyze authentication-related logs
-- Identify failed login attempts
-- Detect anomalies and suspicious behavior
-- Correlate security events
-- Create alerts
-- Document findings in a professional report
-
-# 🛠 Tools Used
-
-- Splunk Enterprise / Splunk Free (Primary & only tool)
-
-- ⚠️ No external tools (Linux CLI, Event Viewer, etc.) are used. All analysis is done inside Splunk.
-
-## 📂 Log Sources
-
-You may use any one of the following:
-
-- Linux authentication logs (auth.log)
-
-- Windows Security Event Logs
-
-- Sample logs from Splunk (recommended for beginners)
-
-- Recommended Sample Data
-
-- tutorialdata.zip (Splunk official sample data)
-
-- Windows Security Logs (Event IDs 4624, 4625)
-
-## ⚙️ Project Setup
-
-1️⃣ Install Splunk
-
-1. Download link
-   - `https://www.splunk.com/en_us/download/previous-releases.html`
-   
-3. 1️⃣ Download Splunk (Linux .deb)
-   -  `wget -O splunk-9.2.4-c103a21bb11d-linux-2.6-amd64.deb "https://download.splunk.com/products/splunk/releases/9.2.4/linux/splunk-9.2.4-c103a21bb11d-linux-2.6-amd64.deb"`
-   
-5. 2️⃣ Install Splunk
-   `sudo dpkg -i splunk.deb`
-   - If you get dependency errors: `sudo apt --fix-broken install -y`
-
-6. 3️⃣ Start Splunk
- `sudo /opt/splunk/bin/splunk start`
-- ✔ Accept the license
-- ✔ Set admin username & password
-  
-![image](https://github.com/NATTOMR/Task_12-Log-Monitoring-Analysis-by-using-splunk/blob/main/images/splunk%20start.png)
-
-8. 4️⃣ Enable Splunk at Boot (recommended)
-  `sudo /opt/splunk/bin/splunk enable boot-start`
-
-10. 5️⃣ Access Splunk Web
-    - Open your browser:  `http://localhost:8000`
-      
-12. 6️⃣ Check Splunk Status (optional)
-    `sudo /opt/splunk/bin/splunk status`
-
-
-![image](https://github.com/NATTOMR/Task_12-Log-Monitoring-Analysis-by-using-splunk/blob/main/images/splunk%20dashboard.png)
-
-  
-
-# How to create splunk dashboard
-
-# Kali Security Dashboard (Splunk)
-
-This guide explains how to create and manage a basic **Splunk dashboard** in a Kali Linux VM
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-Go to Settings → Add Data → Upload
-=======
----
-
-## Option A: Create a New Dashboard
-
-- **Dashboard Title:** Kali Security Dashboard  
-- **Description:** Monitoring logs in Kali Linux  
-- **Dashboard ID:** Auto-filled by Splunk  
-- **Permissions:** Private (for now)
-
-Click **Save**
-
-## 🎉 Your first dashboard is created!
+[![Splunk Enterprise](https://img.shields.io/badge/SIEM-Splunk_Enterprise_9.2.4-000000?style=for-the-badge&logo=splunk&logoColor=green)](https://www.splunk.com)
+[![Kali Linux](https://img.shields.io/badge/OS-Kali_Linux-557C93?style=for-the-badge&logo=kalilinux&logoColor=white)](https://www.kali.org)
+[![Cybersecurity Task](https://img.shields.io/badge/Task-12_Log_Monitoring-red?style=for-the-badge&logo=securityscorecard&logoColor=white)](#-project-overview)
+[![Report](https://img.shields.io/badge/Deliverable-Log_Analysis_Report.md-blue?style=for-the-badge&logo=markdown&logoColor=white)](Log_Analysis_Report.md)
 
 ---
 
-## Step : View Your Dashboard
+## 📌 Project Overview
 
-1. Click **Dashboards**
-2. Open **Kali Security Dashboard**
-3. You will see your first panel
+This repository demonstrates end-to-end log monitoring, SIEM analysis, threat hunting, and incident detection using **Splunk Enterprise** on a **Kali Linux** virtual environment. It simulates a real-world SOC (Security Operations Center) workflow where security log telemetry (`ssh_logs (1).json` containing 1,200 events) is ingested, parsed, analyzed, correlated, and visualized to identify brute-force attacks, port scanning, and suspicious network activity.
 
----
-
-## Step : Add More Panels
-
-Repeat the process to build a complete dashboard.
+> 📄 **Complete Deliverable:** View the full executive-ready report in [Log_Analysis_Report.md](Log_Analysis_Report.md).
 
 ---
 
-### Example 1: Login Attempts (Auth Logs)
-
-**SPL Query**
-``spl
-`index=* sourcetype=linux_secure OR sourcetype=linux_auth
-| stats count by user`
-
-- Save → Save As Dashboard Panel
-
-- Choose Existing Dashboard
-
-- Select Kali Security Dashboard
-
-## 2️⃣ Upload Logs
-
-<HEAD
-Go to Settings → Add Data → Upload
-
-- Select log files
-
-- Assign a source type (e.g., linux_secure, WinEventLog:Security)
-
-![image]()
-![image]()
-![image]()
-![image]()
-![image]()
-
-# 🔎 Analysis Tasks (Step-by-Step)
- 1️⃣ Understand Log Types
-
-### Identify fields such as:
-
-- user
-
-- src_ip
-
-- action
-
-- status
-
-- EventCode
-
-1. Example SPL:
-
-`index=main | stats count by sourcetype`
-2. 2️⃣ Analyze Authentication Logs
-
-`Focus on login-related events.`
->>>>>>> 19702be3823c286dea16f42566c9df2434ac0b14
-
-`index=main `
-(login OR authentication)
-
-<<<<<<< HEAD
-Assign a source type (e.g., linux_secure, WinEventLog:Security)
-
-Index: main
-
-🔎 Analysis Tasks (Step-by-Step)
-1️⃣ Understand Log Types
-
-Identify fields such as:
-
-user
-
-src_ip
-
-action
-
-status
-
-EventCode
-
-Example SPL:
-
-index=main | stats count by sourcetype
-2️⃣ Analyze Authentication Logs
-
-Focus on login-related events.
-=======
-- Go to Settings → Add Data → Upload
-
-- Select log files
-
-- Assign a source type (e.g., linux_secure, WinEventLog:Security)
-
-Index: main
-
-# 🔎 Analysis Tasks (Step-by-Step)
- 1️⃣ Understand Log Types
-
-### Identify fields such as:
-
-- user
-
-- src_ip
-
-- action
-
-- status
-
-- EventCode
-
-1. Example SPL:
-
-`index=main | stats count by sourcetype`
-2. 2️⃣ Analyze Authentication Logs
-
-`Focus on login-related events.`
->>>>>>> 2d12d3007859112b25b31432091bb1a6e7faa2d5
-
-index=main (login OR authentication)
-3️⃣ Identify Failed Logins
-index=main (failed OR failure)
-=======
-3. 3️⃣ Identify Failed Logins
-   
-`index=main (failed OR failure)
->>>>>>> 19702be3823c286dea16f42566c9df2434ac0b14
-| stats count by user, src_ip
-| sort -count`
-
-4. 4️⃣ Detect Anomalies
-
-Detect brute-force or suspicious behavior.
-
-`index=main failed
-| stats count by src_ip
-| where count > 5`
-
-5. 5️⃣ Correlate Events
-
-Correlate failed logins followed by successful logins.
-
-`index=main
-| transaction user maxspan=10m
-| search failed success`
-
-6. 6️⃣ SIEM Basics in Splunk
-
-- Use Indexes for log storage
-
-- Use Search Processing Language (SPL)
-
-- Apply Time-based analysis
-
-`index=main | timechart count`
-
-7. 7️⃣ Create Alerts
-
-Example: Alert for multiple failed logins.
-
-`index=main failed
-| stats count by src_ip
-| where count > 10`
-
-- Save as Alert
-
-- Trigger condition: If result > 0
-
-- Action: Log event / Email (optional)
-
-
-# 📄 Deliverables
-# ✅ Log Analysis Report
-
-Include:
-
-Objective
-
-Log sources
-
-Key SPL queries
-
-Detected incidents
-
-Screenshots
-
-Mitigation recommendations
-
-🏁 Final Outcome
-
-By completing this project, you gain:
-
-Hands-on Splunk experience
-
-Incident detection skills
-
-SIEM fundamentals
-
-Portfolio-ready cybersecurity project
+## 🎯 Key Objectives
+
+- ⚙️ **SIEM Deployment:** Install, configure, and manage Splunk Enterprise on Kali Linux.
+- 📥 **Log Ingestion:** Load and parse structured JSON security logs (`ssh_logs (1).json`) and system authentication logs (`auth.log`).
+- 🔎 **SPL Threat Hunting:** Author custom Search Processing Language (SPL) queries to analyze authentication behavior.
+- 🚨 **Incident Detection:** Identify failed logins, high-frequency brute-force attempts, and unauthenticated network probes.
+- 🔗 **Event Correlation:** Track attack progressions across timestamps (failed logins leading to successful access).
+- 📊 **Security Dashboarding:** Construct interactive, multi-panel Splunk Security Dashboards.
+- 🔔 **SIEM Alerting:** Design real-time alert trigger rules for SOC incident response.
+- 📝 **Professional Reporting:** Document findings, threat intelligence, and security hardening recommendations.
+
+---
+
+## 🛠 Lab Architecture & Components
+
+```
+┌────────────────────────────────────────────────────────┐
+│             Target Infrastructure / Endpoints          │
+│   Linux Hosts (auth.log) / SSH Jump Servers / Datasets │
+└───────────────────────────┬────────────────────────────┘
+                            │ (Log Telemetry / JSON Feed)
+                            ▼
+┌────────────────────────────────────────────────────────┐
+│            Splunk Ingestion & Indexing Engine           │
+│   • Index: main                                        │
+│   • Sourcetype: _json / linux_secure                   │
+└───────────────────────────┬────────────────────────────┘
+                            │ (SPL Query Execution)
+                            ▼
+┌────────────────────────────────────────────────────────┐
+│             Splunk Security Dashboard (Web UI)         │
+│   • Real-Time Threat Alerts                            │
+│   • Auth Summary Metrics                               │
+│   • Top Attacker IP Geolocation / Charts               │
+└────────────────────────##───────────────────────────┘
+```
+
+![Lab Architecture](Lab%20Architecture.jpg)
+
+### Tools & Requirements:
+- **SIEM Engine:** Splunk Enterprise `v9.2.4`
+- **Workstation OS:** Kali Linux x86_64
+- **Primary Log Source:** `ssh_logs (1).json` (1,200 SSH events)
+- **Web UI Endpoint:** `http://localhost:8000`
+
+---
+
+## ⚙️ Splunk Installation & Setup on Kali Linux
+
+### Step 1: Download Splunk Enterprise Package
+```bash
+wget -O splunk-9.2.4-c103a21bb11d-linux-2.6-amd64.deb "https://download.splunk.com/products/splunk/releases/9.2.4/linux/splunk-9.2.4-c103a21bb11d-linux-2.6-amd64.deb"
+```
+
+### Step 2: Install Debian Package
+```bash
+sudo dpkg -i splunk-9.2.4-c103a21bb11d-linux-2.6-amd64.deb
+# Fix any missing dependencies if prompted:
+sudo apt --fix-broken install -y
+```
+
+### Step 3: Start Splunk Engine
+```bash
+sudo /opt/splunk/bin/splunk start --accept-license
+```
+*(Specify admin username and password when prompted)*
+
+![Splunk Start](images/splunk%20start.png)
+
+### Step 4: Verify Service Status & Enable Boot Start
+```bash
+sudo /opt/splunk/bin/splunk status
+sudo /opt/splunk/bin/splunk enable boot-start
+```
+
+![Splunk Status](images/splunk%20status.png)
+
+### Step 5: Access Web Interface
+Open your web browser and navigate to:
+```
+http://localhost:8000
+```
+Log in using your configured admin credentials.
+
+![Splunk Dashboard](images/splunk%20dashboard.png)
+
+---
+
+## 📂 Data Ingestion Workflow
+
+1. Navigate to **Settings → Add Data → Upload**.
+2. Select `ssh_logs (1).json` (or `/var/log/auth.log`).
+3. Set Source Type to `_json` (or `linux_secure`).
+4. Set Target Index to `main`.
+5. Review schema and submit for indexing.
+
+---
+
+## 🔎 SPL Query Library for Threat Hunting
+
+### 1️⃣ Summarize Security Events by Categorization
+```spl
+index=main 
+| stats count by event_type 
+| sort - count
+```
+
+### 2️⃣ Top Brute-Force Attacker Source IPs
+```spl
+index=main auth_success=false OR event_type="Multiple Failed Authentication Attempts"
+| stats count as failed_attempts by id.orig_h
+| where failed_attempts > 5
+| sort - failed_attempts
+```
+
+### 3️⃣ Target Server Exposure & Connection Volume
+```spl
+index=main 
+| stats count by id.resp_h, id.resp_p 
+| sort - count
+```
+
+### 4️⃣ Unauthenticated Port 22 Probes
+```spl
+index=main event_type="Connection Without Authentication"
+| stats count by id.orig_h, id.resp_h
+| sort - count
+```
+
+### 5️⃣ Correlate Failed Logins Followed by Success
+```spl
+index=main 
+| transaction id.orig_h maxspan=15m 
+| search auth_success=true AND (event_type="Failed SSH Login" OR event_type="Multiple Failed Authentication Attempts")
+| table _time, id.orig_h, id.resp_h, duration, eventcount
+```
+
+---
+
+## 📊 Splunk Security Dashboard Showcase
+
+### Full SOC Security Dashboard
+![Splunk Security Dashboard](images/splung%20dashboard.jpeg)
+
+### Dashboard Panels Breakdown:
+
+| Panel # | Visual Component | Screenshot Reference | Description |
+| :--- | :--- | :--- | :--- |
+| **01** | Total SSH Log Count | ![Panel 1](images/new%20dashboard-1.jpeg) | Displays single-value metric of total ingested log events (1,200). |
+| **02** | Auth Status Breakdown | ![Panel 2](images/new%20dashboard-2.jpeg) | Pie chart illustrating Successful vs Failed vs Unauthenticated attempts. |
+| **03** | Attacker IP Ranking | ![Panel 3](images/new%20dashboard-3.jpeg) | Bar chart isolating top offending source IPs (`10.0.0.25`, `10.0.0.18`). |
+| **04** | Server Load Distribution | ![Panel 4](images/new%20dashboard-4.jpeg) | Column chart showing connection distribution across target servers. |
+| **05** | Timechart Event Velocity | ![Panel 5](images/new%20dashboard-5.jpeg) | Line graph tracking attack activity over timestamps. |
+
+### Secondary Dashboard Overview
+![Dashboard View 1](dashboard-1.png)
+![Dashboard View 2](dashboard-2.png)
+
+---
+
+## 🚨 SIEM Alerts & Trigger Logic
+
+```spl
+# Alert 1: High-Volume Brute Force Detection
+index=main (event_type="Failed SSH Login" OR event_type="Multiple Failed Authentication Attempts")
+| stats count by id.orig_h
+| where count >= 5
+```
+- **Trigger:** >5 failures within 5 minutes.
+- **Action:** Send Email Alert & Execute Dynamic Firewall Block.
+
+---
+
+## 📄 Key Findings & Deliverables
+
+- **Dataset Ingested:** 1,200 structured SSH log events (`ssh_logs (1).json`).
+- **Malicious/Failed Ratio:** **50.67%** of overall traffic (608 failed/brute-force events).
+- **Top Threat Actor IP:** `10.0.0.25` (39 total events, 31 failed/brute-force).
+- **Primary Targeted Assets:** `10.0.1.6`, `10.0.1.2`, and `10.0.1.9`.
+- **Detailed Security Report:** Complete SOC analysis, hardening guide, and interview Q&A available in [Log_Analysis_Report.md](Log_Analysis_Report.md).
+
+---
+
+## 🏁 Technical Interview Reference Q&A
+
+1. **What is a Log?** Automatically recorded timestamped entries of system/network events.
+2. **What is a SIEM?** Centralized software platform (Splunk, Sentinel) for log aggregation, search, correlation, and alerting.
+3. **Why are Logs Important?** Essential for threat detection, incident forensics, auditing, and compliance.
+4. **What is Anomaly Detection?** Identifying baseline deviations (e.g. unusual login volume or off-hour access).
+5. **Examples of Security Logs:** `auth.log`, Windows Event Logs (4624/4625), Firewall logs, Sysmon, DNS logs.
+
+*(See [Log_Analysis_Report.md](Log_Analysis_Report.md#9-technical-interview-questions--answers) for expanded technical answers)*
