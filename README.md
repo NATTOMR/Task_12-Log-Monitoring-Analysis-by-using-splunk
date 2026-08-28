@@ -238,3 +238,12 @@ index=main (event_type="Failed SSH Login" OR event_type="Multiple Failed Authent
 5. **Examples of Security Logs:** `auth.log`, Windows Event Logs (4624/4625), Firewall logs, Sysmon, DNS logs.
 
 *(See [Log_Analysis_Report.md](Log_Analysis_Report.md#9-technical-interview-questions--answers) for expanded technical answers)*
+
+---
+
+## 📚 References & Resources
+
+- **Splunk Enterprise Documentation:** [Splunk Docs](https://docs.splunk.com/Documentation)
+- **Kali Linux Platform:** [Kali Linux Official Website](https://www.kali.org/)
+- **SSH Security Best Practices:** [Securing OpenSSH](https://infosec.mozilla.org/guidelines/openssh)
+- **SIEM Concepts:** [What is SIEM? (IBM)](https://www.ibm.com/topics/siem)
