@@ -31,7 +31,7 @@ This report documents a comprehensive log monitoring, SIEM analysis, and threat 
 
 The monitoring infrastructure was deployed using Splunk Enterprise on a Kali Linux SOC analyst workstation. The system topology ingests log feeds from target endpoints, processes sourcetypes, indexes event timestamps, and renders dashboards.
 
-![Lab Architecture](Lab%20Architecture.jpg)
+![Lab Architecture](Lab_Architecture.jpg)
 
 ### Architecture Layer Breakdown:
 
@@ -170,7 +170,7 @@ Based on log correlations, two major security incident patterns were identified 
 
 To visualize security telemetry for real-time monitoring, a dedicated **Kali Security Dashboard** was configured in Splunk.
 
-![Splunk Security Dashboard](images/splung%20dashboard.jpeg)
+![Splunk Security Dashboard](images/splunk_security_dashboard.jpeg)
 
 ### Visual Dashboard Panels:
 

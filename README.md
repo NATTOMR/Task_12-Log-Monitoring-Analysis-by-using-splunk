@@ -30,6 +30,35 @@ This repository demonstrates end-to-end log monitoring, SIEM analysis, threat hu
 
 ---
 
+## 🗺️ Project Roadmap
+
+- [x] **Phase 1: Environment Provisioning**
+  - [x] Deploy Kali Linux virtual machine
+  - [x] Install and configure Splunk Enterprise `v9.2.4`
+  - [x] Establish isolated lab network
+
+- [x] **Phase 2: Data Ingestion & Parsing**
+  - [x] Collect authentic SSH log dataset (`ssh_logs (1).json`)
+  - [x] Configure Splunk data inputs and indexing (`index=main`)
+  - [x] Validate JSON field extraction and sourcetype parsing
+
+- [x] **Phase 3: Threat Hunting & Analytics**
+  - [x] Author SPL queries for failed login tracking
+  - [x] Identify top attacker IPs and targeted subnets
+  - [x] Correlate brute-force attempts leading to successful compromise
+
+- [x] **Phase 4: Visualizations & Alerting**
+  - [x] Build comprehensive SOC Security Dashboard
+  - [x] Implement real-time alerting for high-volume brute-force attacks
+  - [x] Create multi-panel visualizations (pie charts, timecharts, bar charts)
+
+- [ ] **Phase 5: Future Enhancements (Planned)**
+  - [ ] Integrate automated SOAR response (e.g., auto-blocking IPs via `fail2ban`)
+  - [ ] Expand log sources to include Windows Event Logs and network traffic
+  - [ ] Implement machine learning for anomaly detection (Splunk UBA)
+
+---
+
 ## 🛠 Lab Architecture & Components
 
 ```
@@ -54,7 +83,7 @@ This repository demonstrates end-to-end log monitoring, SIEM analysis, threat hu
 └────────────────────────##───────────────────────────┘
 ```
 
-![Lab Architecture](Lab%20Architecture.jpg)
+![Lab Architecture](Lab_Architecture.jpg)
 
 ### Tools & Requirements:
 - **SIEM Engine:** Splunk Enterprise `v9.2.4`
@@ -84,7 +113,7 @@ sudo /opt/splunk/bin/splunk start --accept-license
 ```
 *(Specify admin username and password when prompted)*
 
-![Splunk Start](images/splunk%20start.png)
+![Splunk Start](images/splunk_start.png)
 
 ### Step 4: Verify Service Status & Enable Boot Start
 ```bash
@@ -92,7 +121,7 @@ sudo /opt/splunk/bin/splunk status
 sudo /opt/splunk/bin/splunk enable boot-start
 ```
 
-![Splunk Status](images/splunk%20status.png)
+![Splunk Status](images/splunk_status.png)
 
 ### Step 5: Access Web Interface
 Open your web browser and navigate to:
@@ -101,7 +130,7 @@ http://localhost:8000
 ```
 Log in using your configured admin credentials.
 
-![Splunk Dashboard](images/splunk%20dashboard.png)
+![Splunk Dashboard](images/splunk_dashboard.png)
 
 ---
 
@@ -159,17 +188,17 @@ index=main
 ## 📊 Splunk Security Dashboard Showcase
 
 ### Full SOC Security Dashboard
-![Splunk Security Dashboard](images/splung%20dashboard.jpeg)
+![Splunk Security Dashboard](images/splunk_security_dashboard.jpeg)
 
 ### Dashboard Panels Breakdown:
 
 | Panel # | Visual Component | Screenshot Reference | Description |
 | :--- | :--- | :--- | :--- |
-| **01** | Total SSH Log Count | ![Panel 1](images/new%20dashboard-1.jpeg) | Displays single-value metric of total ingested log events (1,200). |
-| **02** | Auth Status Breakdown | ![Panel 2](images/new%20dashboard-2.jpeg) | Pie chart illustrating Successful vs Failed vs Unauthenticated attempts. |
-| **03** | Attacker IP Ranking | ![Panel 3](images/new%20dashboard-3.jpeg) | Bar chart isolating top offending source IPs (`10.0.0.25`, `10.0.0.18`). |
-| **04** | Server Load Distribution | ![Panel 4](images/new%20dashboard-4.jpeg) | Column chart showing connection distribution across target servers. |
-| **05** | Timechart Event Velocity | ![Panel 5](images/new%20dashboard-5.jpeg) | Line graph tracking attack activity over timestamps. |
+| **01** | Total SSH Log Count | ![Panel 1](images/new_dashboard-1.jpeg) | Displays single-value metric of total ingested log events (1,200). |
+| **02** | Auth Status Breakdown | ![Panel 2](images/new_dashboard-2.jpeg) | Pie chart illustrating Successful vs Failed vs Unauthenticated attempts. |
+| **03** | Attacker IP Ranking | ![Panel 3](images/new_dashboard-3.jpeg) | Bar chart isolating top offending source IPs (`10.0.0.25`, `10.0.0.18`). |
+| **04** | Server Load Distribution | ![Panel 4](images/new_dashboard-4.jpeg) | Column chart showing connection distribution across target servers. |
+| **05** | Timechart Event Velocity | ![Panel 5](images/new_dashboard-5.jpeg) | Line graph tracking attack activity over timestamps. |
 
 ### Secondary Dashboard Overview
 ![Dashboard View 1](dashboard-1.png)
