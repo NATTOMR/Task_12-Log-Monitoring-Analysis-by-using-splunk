@@ -2,6 +2,7 @@
 **Task 12: Cybersecurity Internship Deliverable**  
 **SIEM Platform:** Splunk Enterprise 9.2.4 on Kali Linux  
 **Log Dataset Analyzed:** `ssh_logs (1).json` (1,200 Connection & Authentication Events)  
+**Date:** August 28, 2026
 
 ---
 
@@ -282,4 +283,5 @@ The following technical Q&A addresses foundational concepts required for cyberse
 
 This project demonstrated full lifecycle SIEM implementation using Splunk Enterprise—from installing Splunk on Kali Linux, ingesting 1,200 structured SSH JSON logs, authoring threat-hunting SPL queries, building custom dashboards, establishing alerting rules, and drafting actionable threat intelligence.
 
-**Report Compiled By:** NATTOMR
+**Report Compiled By:** NATTOMR  
+**Date:** August 28, 2026
