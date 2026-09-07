@@ -1,0 +1,15 @@
+# ==============================================================================
+# Query Name: 06_high_volume_bruteforce_detection.spl
+# Project: P1 — Splunk SOC Home Lab & Log Analysis
+# Purpose: High-volume brute-force detection alert rule
+# Security Use Case: Operational SIEM alert trigger logic for automated ticketing and response
+# ==============================================================================
+
+index=main (event_type="Failed SSH Login" OR event_type="Multiple Failed Authentication Attempts")
+| stats count by id.orig_h
+| where count >= 5
+
+# Expected Interpretation:
+# - Real-time or scheduled saved search query evaluating inbound authentication attempts.
+# - Fires an alert when any single source IP exceeds 5 failed attempts in the time window.
+# - Triggers email notification to SOC tier-1 queue and executes dynamic blocklist updates.

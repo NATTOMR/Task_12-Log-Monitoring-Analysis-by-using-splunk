@@ -1,0 +1,19 @@
+# ==============================================================================
+# Query Name: 01_event_type_distribution.spl
+# Project: P1 — Splunk SOC Home Lab & Log Analysis
+# Purpose: Summarize security events by categorization
+# Security Use Case: Authentication health monitoring and initial attack surface triage
+# ==============================================================================
+
+index=main 
+| stats count by event_type 
+| sort - count
+
+# Expected Interpretation:
+# - Quantifies distribution across:
+#   * Successful SSH Login
+#   * Failed SSH Login
+#   * Multiple Failed Authentication Attempts
+#   * Connection Without Authentication
+# - In a baseline environment, successful logins should dominate. A high proportion
+#   of failed or multi-attempt events (>50%) indicates active adversary activity.

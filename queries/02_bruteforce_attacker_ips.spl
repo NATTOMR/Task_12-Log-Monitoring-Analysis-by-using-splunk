@@ -1,0 +1,17 @@
+# ==============================================================================
+# Query Name: 02_bruteforce_attacker_ips.spl
+# Project: P1 — Splunk SOC Home Lab & Log Analysis
+# Purpose: Top brute-force attacker source IP ranking
+# Security Use Case: Triage source IPs generating repeated failed logins and brute-force bursts
+# ==============================================================================
+
+index=main auth_success=false OR event_type="Multiple Failed Authentication Attempts"
+| stats count as failed_attempts by id.orig_h
+| where failed_attempts > 5
+| sort - failed_attempts
+
+# Expected Interpretation:
+# - Identifies high-frequency offending source IP addresses (e.g., 10.0.0.25, 10.0.0.18).
+# - Isolates hosts that exceed a threshold of 5 failed attempts, distinguishing targeted
+#   brute-force scripts from occasional legitimate user typos.
+# - Provides actionable IOCs (Source IPs) for immediate firewall containment.

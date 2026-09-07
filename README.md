@@ -1,249 +1,369 @@
-# 🔍 Splunk Log Analysis & Incident Detection Project
+# 🛡️ P1 — Splunk SOC Home Lab & Log Analysis
 
-![Banner](banner.png)
+[![Portfolio Master Hub](https://img.shields.io/badge/Portfolio-Master%20Hub-blue.svg)](https://github.com/NATTOMR/splunk-soc-threat-hunting-lab)
+[![SIEM](https://img.shields.io/badge/SIEM-Splunk%20Enterprise%209.2.4-orange.svg)](https://www.splunk.com/)
+[![OS](https://img.shields.io/badge/Host-Kali%20Linux-557C93.svg)](https://www.kali.org/)
+[![Dataset](https://img.shields.io/badge/Events-1%2C200%20SSH%20Logs-green.svg)](data/ssh_logs.json)
+[![Full Report](https://img.shields.io/badge/Deliverable-SOC%20Report%20(PDF)-red.svg)](Log_Analysis_Report.pdf)
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
-[![Splunk Enterprise](https://img.shields.io/badge/SIEM-Splunk_Enterprise_9.2.4-000000?style=for-the-badge&logo=splunk&logoColor=green)](https://www.splunk.com)
-[![Kali Linux](https://img.shields.io/badge/OS-Kali_Linux-557C93?style=for-the-badge&logo=kalilinux&logoColor=white)](https://www.kali.org)
-[![Cybersecurity Task](https://img.shields.io/badge/Task-12_Log_Monitoring-red?style=for-the-badge&logo=securityscorecard&logoColor=white)](#-project-overview)
-[![Report](https://img.shields.io/badge/Deliverable-Log_Analysis_Report.md-blue?style=for-the-badge&logo=markdown&logoColor=white)](Log_Analysis_Report.md)
+> **Master Portfolio Component:** This project represents **Project P1** in the [Splunk SOC & Threat Hunting Lab](https://github.com/NATTOMR/splunk-soc-threat-hunting-lab) portfolio. While originally originating from an intensive cybersecurity internship log monitoring exercise (Task 12), the project has been formalized as the foundational P1 lab demonstrating standalone Splunk Enterprise deployment, structured JSON telemetry ingestion, custom SPL analytics, multi-panel SOC dashboarding, and incident triage.
 
----
-
-## 📌 Project Overview
-
-This repository demonstrates end-to-end log monitoring, SIEM analysis, threat hunting, and incident detection using **Splunk Enterprise** on a **Kali Linux** virtual environment. It simulates a real-world SOC (Security Operations Center) workflow where security log telemetry (`ssh_logs (1).json` containing 1,200 events) is ingested, parsed, analyzed, correlated, and visualized to identify brute-force attacks, port scanning, and suspicious network activity.
-
-> 📄 **Complete Deliverable:** View the full executive-ready report in [Log_Analysis_Report.md](Log_Analysis_Report.md).
+![Banner](screenshots/banner.png)
 
 ---
 
-## 🎯 Key Objectives
+## 1. Project Overview
 
-- ⚙️ **SIEM Deployment:** Install, configure, and manage Splunk Enterprise on Kali Linux.
-- 📥 **Log Ingestion:** Load and parse structured JSON security logs (`ssh_logs (1).json`) and system authentication logs (`auth.log`).
-- 🔎 **SPL Threat Hunting:** Author custom Search Processing Language (SPL) queries to analyze authentication behavior.
-- 🚨 **Incident Detection:** Identify failed logins, high-frequency brute-force attempts, and unauthenticated network probes.
-- 🔗 **Event Correlation:** Track attack progressions across timestamps (failed logins leading to successful access).
-- 📊 **Security Dashboarding:** Construct interactive, multi-panel Splunk Security Dashboards.
-- 🔔 **SIEM Alerting:** Design real-time alert trigger rules for SOC incident response.
-- 📝 **Professional Reporting:** Document findings, threat intelligence, and security hardening recommendations.
+Project P1 establishes the foundational Security Operations Center (SOC) monitoring and analysis environment using **Splunk Enterprise**. The primary objective of this project is to simulate real-world Tier 1/Tier 2 SOC workflows by ingesting authentication and network telemetry, detecting unauthorized access attempts, analyzing brute-force password spraying campaigns, and synthesizing findings into executive and analyst-ready deliverables.
 
----
-
-## 🗺️ Project Roadmap
-
-- [x] **Phase 1: Environment Provisioning**
-  - [x] Deploy Kali Linux virtual machine
-  - [x] Install and configure Splunk Enterprise `v9.2.4`
-  - [x] Establish isolated lab network
-
-- [x] **Phase 2: Data Ingestion & Parsing**
-  - [x] Collect authentic SSH log dataset (`ssh_logs (1).json`)
-  - [x] Configure Splunk data inputs and indexing (`index=main`)
-  - [x] Validate JSON field extraction and sourcetype parsing
-
-- [x] **Phase 3: Threat Hunting & Analytics**
-  - [x] Author SPL queries for failed login tracking
-  - [x] Identify top attacker IPs and targeted subnets
-  - [x] Correlate brute-force attempts leading to successful compromise
-
-- [x] **Phase 4: Visualizations & Alerting**
-  - [x] Build comprehensive SOC Security Dashboard
-  - [x] Implement real-time alerting for high-volume brute-force attacks
-  - [x] Create multi-panel visualizations (pie charts, timecharts, bar charts)
-
-- [ ] **Phase 5: Future Enhancements (Planned)**
-  - [ ] Integrate automated SOAR response (e.g., auto-blocking IPs via `fail2ban`)
-  - [ ] Expand log sources to include Windows Event Logs and network traffic
-  - [ ] Implement machine learning for anomaly detection (Splunk UBA)
+### Operational Context
+- **Lab Type:** Standalone SOC Home Lab / Educational Security Monitoring Environment
+- **Core Focus:** Centralized Log Ingestion, SPL Development, SSH Authentication Forensics, and Visual Dashboard Engineering
+- **Target Data Feed:** 1,200 structured SSH connection and authentication records (`data/ssh_logs.json`)
+- **Master Portfolio Link:** [NATTOMR/splunk-soc-threat-hunting-lab](https://github.com/NATTOMR/splunk-soc-threat-hunting-lab)
 
 ---
 
-## 🛠 Lab Architecture & Components
+## 2. Objectives
 
+- **SIEM Installation & Management:** Deploy, configure, and maintain Splunk Enterprise `v9.2.4` on a Linux virtualization host.
+- **Data Ingestion & Field Extraction:** Ingest high-density JSON security logs, validate automatic key-value field extraction, and verify index partitioning (`index=main`).
+- **SPL Threat Hunting:** Formulate custom Search Processing Language (SPL) queries to isolate authentication anomalies, calculate failure ratios, and evaluate host exposure.
+- **Incident Investigation:** Triage brute-force attempts, detect port 22 reconnaissance probes, and correlate multi-stage authentication behaviors across sliding time windows.
+- **SOC Dashboard Engineering:** Design and build an operational 5-panel SOC Security Dashboard providing single-pane-of-glass visibility.
+- **Alert Logic Formulation:** Define SIEM alert triggers and threshold criteria for high-volume brute-force attacks.
+- **Professional Reporting:** Document findings, attacker profiles, and defensive hardening measures in a publication-grade SOC report.
+
+---
+
+## 3. SOC Architecture
+
+The laboratory models a centralized SIEM telemetry pipeline:
+
+```mermaid
+flowchart TD
+    subgraph DataLayer["Telemetry Source Layer"]
+        DS1["Raw SSH Telemetry Feed
+(data/ssh_logs.json)"]
+        DS2["Linux Authentication Logs
+(/var/log/auth.log)"]
+    end
+
+    subgraph IngestionLayer["Log Ingestion & Indexing Engine"]
+        ING["Direct Splunk Web Ingestion
+(Sourcetype: _json, Index: main)"]
+        UF["Splunk Universal Forwarder
+(Planned for P2 / P3)"]
+    end
+
+    subgraph SIEMLayer["Splunk Enterprise (Kali Linux)"]
+        IDX["Splunk Indexer & Search Head
+(Web UI: http://localhost:8000)"]
+        SPL["Search Processing Language (SPL) Engine
+(Queries 01-06)"]
+    end
+
+    subgraph SOCPresentation["SOC Operations & Deliverables"]
+        DASH["5-Panel SOC Security Dashboard
+(Single Value, Charts, Timechart)"]
+        ALERT["SIEM Alert Logic & Threshold Rules"]
+        REP["Comprehensive SOC Forensic Report
+(Log_Analysis_Report.pdf)"]
+    end
+
+    DS1 --> ING
+    DS2 -. Future Telemetry .-> UF
+    ING --> IDX
+    UF -. Port 9997 (Planned) .-> IDX
+    IDX --> SPL
+    SPL --> DASH
+    SPL --> ALERT
+    SPL --> REP
 ```
-┌────────────────────────────────────────────────────────┐
-│             Target Infrastructure / Endpoints          │
-│   Linux Hosts (auth.log) / SSH Jump Servers / Datasets │
-└───────────────────────────┬────────────────────────────┘
-                            │ (Log Telemetry / JSON Feed)
-                            ▼
-┌────────────────────────────────────────────────────────┐
-│            Splunk Ingestion & Indexing Engine           │
-│   • Index: main                                        │
-│   • Sourcetype: _json / linux_secure                   │
-└───────────────────────────┬────────────────────────────┘
-                            │ (SPL Query Execution)
-                            ▼
-┌────────────────────────────────────────────────────────┐
-│             Splunk Security Dashboard (Web UI)         │
-│   • Real-Time Threat Alerts                            │
-│   • Auth Summary Metrics                               │
-│   • Top Attacker IP Geolocation / Charts               │
-└────────────────────────##───────────────────────────┘
-```
 
-![Lab Architecture](Lab_Architecture.jpg)
+![Lab Architecture](screenshots/lab-architecture.jpg)
 
-### Tools & Requirements:
-- **SIEM Engine:** Splunk Enterprise `v9.2.4`
-- **Workstation OS:** Kali Linux x86_64
-- **Primary Log Source:** `ssh_logs (1).json` (1,200 SSH events)
-- **Web UI Endpoint:** `http://localhost:8000`
+*(For in-depth architectural notes, see [docs/architecture.md](docs/architecture.md))*
 
 ---
 
-## ⚙️ Splunk Installation & Setup on Kali Linux
+## 4. Environment
 
-### Step 1: Download Splunk Enterprise Package
+- **Virtualization Hypervisor:** VirtualBox (Isolated Host-Only & NAT network segments)
+- **Host Workstation:** Kali Linux x86_64
+- **Splunk Enterprise Directory:** `/opt/splunk`
+- **Splunk Web Interface:** `http://localhost:8000`
+- **Splunk Management Port:** `8089/tcp`
+- **Primary Data Store:** `index=main`
+
+---
+
+## 5. Technology Stack
+
+| Technology / Component | Version / Role | Lab Implementation Status |
+|---|---|:---:|
+| **Splunk Enterprise** | `v9.2.4` — Central SIEM platform, search head, and indexer | ✅ **IMPLEMENTED** |
+| **Search Processing Language (SPL)** | Syntax for statistical aggregation, correlation, and alerts | ✅ **IMPLEMENTED** |
+| **Linux Host** | Kali Linux — SIEM host environment | ✅ **IMPLEMENTED** |
+| **JSON Data Parser** | Splunk `_json` sourcetype parser and field extractor | ✅ **IMPLEMENTED** |
+| **Splunk Universal Forwarder** | Endpoint agent shipping logs over port 9997 | ⚪ **PLANNED (P2/P3)** |
+| **MITRE ATT&CK Mapping** | Framework mapping for brute-force and reconnaissance tactics | 🟡 **PARTIALLY IMPLEMENTED** |
+| **Automated SOAR Action** | Dynamic firewall blocking / account lockout scripts | ⚪ **PLANNED** |
+
+---
+
+## 6. Splunk Installation & Service Health
+
+Splunk Enterprise was installed on the Kali Linux host using the official Debian package:
+
 ```bash
+# 1. Download official Debian package
 wget -O splunk-9.2.4-c103a21bb11d-linux-2.6-amd64.deb "https://download.splunk.com/products/splunk/releases/9.2.4/linux/splunk-9.2.4-c103a21bb11d-linux-2.6-amd64.deb"
-```
 
-### Step 2: Install Debian Package
-```bash
+# 2. Install package via dpkg
 sudo dpkg -i splunk-9.2.4-c103a21bb11d-linux-2.6-amd64.deb
-# Fix any missing dependencies if prompted:
-sudo apt --fix-broken install -y
-```
 
-### Step 3: Start Splunk Engine
-```bash
+# 3. Start service and configure administrator credentials
 sudo /opt/splunk/bin/splunk start --accept-license
-```
-*(Specify admin username and password when prompted)*
 
-![Splunk Start](images/splunk_start.png)
-
-### Step 4: Verify Service Status & Enable Boot Start
-```bash
-sudo /opt/splunk/bin/splunk status
+# 4. Enable boot-start and check status
 sudo /opt/splunk/bin/splunk enable boot-start
+sudo /opt/splunk/bin/splunk status
 ```
 
-![Splunk Status](images/splunk_status.png)
+| Startup Verification | Service Status Confirmation |
+|---|---|
+| ![Splunk Startup](screenshots/splunk-startup.png) | ![Splunk Status](screenshots/splunk-status.png) |
 
-### Step 5: Access Web Interface
-Open your web browser and navigate to:
-```
-http://localhost:8000
-```
-Log in using your configured admin credentials.
-
-![Splunk Dashboard](images/splunk_dashboard.png)
+*(Detailed deployment steps documented in [docs/installation.md](docs/installation.md))*
 
 ---
 
-## 📂 Data Ingestion Workflow
+## 7. Log Ingestion & Data Management
 
-1. Navigate to **Settings → Add Data → Upload**.
-2. Select `ssh_logs (1).json` (or `/var/log/auth.log`).
-3. Set Source Type to `_json` (or `linux_secure`).
+In this lab, log telemetry is loaded into Splunk via direct structured file ingestion:
+
+1. In Splunk Web, open **Settings** → **Add Data** → **Upload**.
+2. Upload [`data/ssh_logs.json`](data/ssh_logs.json).
+3. Set Source Type to `_json`. Splunk automatically parses the nested JSON key-value schema.
 4. Set Target Index to `main`.
-5. Review schema and submit for indexing.
+
+| Splunk Web Console |
+|---|
+| ![Splunk Home](screenshots/splunk-home.png) |
+
+*(See [docs/log-ingestion.md](docs/log-ingestion.md) for full ingestion and schema documentation)*
 
 ---
 
-## 🔎 SPL Query Library for Threat Hunting
+## 8. Dataset Profile
 
-### 1️⃣ Summarize Security Events by Categorization
-```spl
-index=main 
-| stats count by event_type 
-| sort - count
-```
+The dataset [`data/ssh_logs.json`](data/ssh_logs.json) comprises **1,200 structured SSH connection events**:
 
-### 2️⃣ Top Brute-Force Attacker Source IPs
-```spl
-index=main auth_success=false OR event_type="Multiple Failed Authentication Attempts"
-| stats count as failed_attempts by id.orig_h
-| where failed_attempts > 5
-| sort - failed_attempts
-```
+| Event Type | Count | % Share | Threat Assessment |
+|---|:---:|:---:|---|
+| **Successful SSH Login** | 306 | 25.50% | Verified legitimate authentication session |
+| **Failed SSH Login** | 305 | 25.42% | Single failed attempt (credential error / bad password) |
+| **Multiple Failed Authentication Attempts** | 303 | 25.25% | High-frequency brute-force password guessing burst |
+| **Connection Without Authentication** | 286 | 23.83% | Port 22 reconnaissance probe / SSH banner grab |
+| **Total Ingested Volume** | **1,200** | **100.0%** | **50.67% total malicious / anomalous traffic** |
 
-### 3️⃣ Target Server Exposure & Connection Volume
-```spl
-index=main 
-| stats count by id.resp_h, id.resp_p 
-| sort - count
-```
+---
 
-### 4️⃣ Unauthenticated Port 22 Probes
-```spl
-index=main event_type="Connection Without Authentication"
-| stats count by id.orig_h, id.resp_h
-| sort - count
-```
+## 9. SPL Query Library
 
-### 5️⃣ Correlate Failed Logins Followed by Success
+The project includes modular, reusable SPL scripts located under [`queries/`](queries/):
+
+| Query File | Purpose | Security Use Case |
+|---|---|---|
+| [`01_event_type_distribution.spl`](queries/01_event_type_distribution.spl) | Aggregate events by categorization | Baseline authentication health check |
+| [`02_bruteforce_attacker_ips.spl`](queries/02_bruteforce_attacker_ips.spl) | Rank top offending source IPs | Attacker triage & firewall containment |
+| [`03_target_server_exposure.spl`](queries/03_target_server_exposure.spl) | Map inbound traffic per target server | Asset exposure & risk assessment |
+| [`04_unauthenticated_ssh_probes.spl`](queries/04_unauthenticated_ssh_probes.spl) | Detect port 22 connections with no auth | Reconnaissance / banner grabbing detection |
+| [`05_failed_login_to_success_correlation.spl`](queries/05_failed_login_to_success_correlation.spl) | Correlate failure bursts leading to success | Critical detection: Compromised accounts |
+| [`06_high_volume_bruteforce_detection.spl`](queries/06_high_volume_bruteforce_detection.spl) | Threshold-based alert trigger logic | Operational SIEM alert rule (>5 failures) |
+
+---
+
+## 10. Threat Detection & Investigation Findings
+
+Detailed analysis of the 1,200 events revealed active adversary reconnaissance and coordinated password guessing:
+
+### Top Threat Actor IPs
+Statistical analysis isolated the primary sources responsible for the brute-force activity:
+1. **`10.0.0.25`**: 39 total connections — **31 failed/brute-force attempts** (Primary Threat Actor).
+2. **`10.0.0.18`**: 32 total connections — **29 failed attempts**.
+3. **`10.0.0.46`**: 27 failed attempts.
+4. **`10.0.0.22`**: 26 failed attempts.
+5. **`10.0.0.48`**: 32 total connections — **26 failed attempts**.
+
+### Primary Target Assets
+Adversary traffic heavily targeted three internal SSH jump hosts:
+- **`10.0.1.6`** (115 total connections)
+- **`10.0.1.2`** (115 total connections)
+- **`10.0.1.9`** (113 total connections)
+
+### Event Correlation (Compromise Indicator)
+Using transaction grouping across a 15-minute sliding window:
 ```spl
 index=main 
 | transaction id.orig_h maxspan=15m 
 | search auth_success=true AND (event_type="Failed SSH Login" OR event_type="Multiple Failed Authentication Attempts")
 | table _time, id.orig_h, id.resp_h, duration, eventcount
 ```
+The query identified sessions where repetitive authentication failures culminated in a successful login from the same origin IP. In a SOC environment, this constitutes a **Critical Tier 1 Incident** indicating a breached credential.
+
+*(Read the complete investigation findings in [docs/investigation.md](docs/investigation.md))*
 
 ---
 
-## 📊 Splunk Security Dashboard Showcase
+## 11. SOC Security Dashboard
 
-### Full SOC Security Dashboard
-![Splunk Security Dashboard](images/splunk_security_dashboard.jpeg)
+An operational 5-panel dashboard was constructed in Splunk Web to provide consolidated visibility:
 
-### Dashboard Panels Breakdown:
+![Consolidated SOC Security Dashboard](screenshots/soc-dashboard.jpeg)
 
-| Panel # | Visual Component | Screenshot Reference | Description |
-| :--- | :--- | :--- | :--- |
-| **01** | Total SSH Log Count | ![Panel 1](images/new_dashboard-1.jpeg) | Displays single-value metric of total ingested log events (1,200). |
-| **02** | Auth Status Breakdown | ![Panel 2](images/new_dashboard-2.jpeg) | Pie chart illustrating Successful vs Failed vs Unauthenticated attempts. |
-| **03** | Attacker IP Ranking | ![Panel 3](images/new_dashboard-3.jpeg) | Bar chart isolating top offending source IPs (`10.0.0.25`, `10.0.0.18`). |
-| **04** | Server Load Distribution | ![Panel 4](images/new_dashboard-4.jpeg) | Column chart showing connection distribution across target servers. |
-| **05** | Timechart Event Velocity | ![Panel 5](images/new_dashboard-5.jpeg) | Line graph tracking attack activity over timestamps. |
+### Dashboard Panels
 
-### Secondary Dashboard Overview
-![Dashboard View 1](dashboard-1.png)
-![Dashboard View 2](dashboard-2.png)
+| Panel | Name | Visualization | Visual Exhibit | Metric / Security Purpose |
+|:---:|---|---|:---:|---|
+| **01** | Total Ingested Events | Single Value | ![P1](screenshots/dashboard-panel-01.jpeg) | Ingested scope tracking (`1,200` events) |
+| **02** | Auth Status Breakdown | Pie Chart | ![P2](screenshots/dashboard-panel-02.jpeg) | Proportional distribution of auth outcomes |
+| **03** | Attacker IP Ranking | Bar Chart | ![P3](screenshots/dashboard-panel-03.jpeg) | Top offending sources (`10.0.0.25`, `10.0.0.18`) |
+| **04** | Target Server Load | Column Chart | ![P4](screenshots/dashboard-panel-04.jpeg) | Connection volume per internal server |
+| **05** | Attack Velocity | Timechart | ![P5](screenshots/dashboard-panel-05.jpeg) | Trend analysis of event categories over time |
+
+### Additional Dashboard Perspectives
+| Overview Perspective | Detailed Events View |
+|---|---|
+| ![Dashboard 1](screenshots/dashboard-overview-1.png) | ![Dashboard 2](screenshots/dashboard-overview-2.png) |
+
+*(See [dashboards/README.md](dashboards/README.md) for panel-by-panel reconstruction instructions)*
 
 ---
 
-## 🚨 SIEM Alerts & Trigger Logic
+## 12. Alerting Logic
+
+An alert rule was formulated to detect brute-force surges:
 
 ```spl
-# Alert 1: High-Volume Brute Force Detection
 index=main (event_type="Failed SSH Login" OR event_type="Multiple Failed Authentication Attempts")
 | stats count by id.orig_h
 | where count >= 5
 ```
-- **Trigger:** >5 failures within 5 minutes.
-- **Action:** Send Email Alert & Execute Dynamic Firewall Block.
+
+- **Execution Frequency:** Scheduled every 5 minutes (or real-time stream).
+- **Trigger Threshold:** When `count >= 5` failed attempts within 5 minutes.
+- **Action Plan:**
+  1. Generate a high-priority SIEM alert in the SOC analyst queue.
+  2. Dispatch notification email with source IP and target host details.
+  3. (Planned Automation) Trigger firewall drop rule or fail2ban jail for the offending IP.
 
 ---
 
-## 📄 Key Findings & Deliverables
+## 13. Security Hardening Recommendations
 
-- **Dataset Ingested:** 1,200 structured SSH log events (`ssh_logs (1).json`).
-- **Malicious/Failed Ratio:** **50.67%** of overall traffic (608 failed/brute-force events).
-- **Top Threat Actor IP:** `10.0.0.25` (39 total events, 31 failed/brute-force).
-- **Primary Targeted Assets:** `10.0.1.6`, `10.0.1.2`, and `10.0.1.9`.
-- **Detailed Security Report:** Complete SOC analysis, hardening guide, and interview Q&A available in [Log_Analysis_Report.md](Log_Analysis_Report.md).
+Based on the forensic analysis, the following host and network defenses are recommended:
 
----
-
-## 🏁 Technical Interview Reference Q&A
-
-1. **What is a Log?** Automatically recorded timestamped entries of system/network events.
-2. **What is a SIEM?** Centralized software platform (Splunk, Sentinel) for log aggregation, search, correlation, and alerting.
-3. **Why are Logs Important?** Essential for threat detection, incident forensics, auditing, and compliance.
-4. **What is Anomaly Detection?** Identifying baseline deviations (e.g. unusual login volume or off-hour access).
-5. **Examples of Security Logs:** `auth.log`, Windows Event Logs (4624/4625), Firewall logs, Sysmon, DNS logs.
-
-*(See [Log_Analysis_Report.md](Log_Analysis_Report.md#9-technical-interview-questions--answers) for expanded technical answers)*
+1. **Disable Password-Based Authentication:** Enforce SSH Public Key Authentication (`ed25519`) and set `PasswordAuthentication no` in `/etc/ssh/sshd_config`.
+2. **Implement Rate Limiting & Fail2Ban:** Enforce automated ban rules after 3 consecutive authentication failures.
+3. **Change Default SSH Listening Port:** Move SSH from port 22 to a non-standard port to reduce automated background scanning noise.
+4. **Deploy Bastion / Jump Host Controls:** Restrict SSH exposure using network firewall ACLs and require VPN access with Multi-Factor Authentication (MFA).
 
 ---
 
-## 📚 References & Resources
+## 14. Project Structure
 
-- **Splunk Enterprise Documentation:** [Splunk Docs](https://docs.splunk.com/Documentation)
-- **Kali Linux Platform:** [Kali Linux Official Website](https://www.kali.org/)
-- **SSH Security Best Practices:** [Securing OpenSSH](https://infosec.mozilla.org/guidelines/openssh)
-- **SIEM Concepts:** [What is SIEM? (IBM)](https://www.ibm.com/topics/siem)
+```text
+Log-Monitoring-Analysis-by-using-splunk/
+├── configs/                             # Configuration templates
+│   ├── inputs.conf.example              # Sample Universal Forwarder input stanzas
+│   └── props.conf.example               # Sample JSON and Linux log parsing rules
+├── dashboards/                          # Dashboard documentation
+│   └── README.md                        # Step-by-step dashboard reconstruction guide
+├── data/                                # Primary telemetry data
+│   └── ssh_logs.json                    # 1,200-event structured SSH log dataset
+├── docs/                                # Detailed technical documentation
+│   ├── architecture.md                  # Lab topology and telemetry pipeline details
+│   ├── installation.md                  # Splunk Enterprise deployment walkthrough
+│   ├── investigation.md                 # Threat actor profiling and incident forensics
+│   ├── log-ingestion.md                 # Ingestion workflow and data dictionary
+│   └── original-internship-task.pdf     # Reference document from initial project origin
+├── queries/                             # Modular SPL search library
+│   ├── 01_event_type_distribution.spl
+│   ├── 02_bruteforce_attacker_ips.spl
+│   ├── 03_target_server_exposure.spl
+│   ├── 04_unauthenticated_ssh_probes.spl
+│   ├── 05_failed_login_to_success_correlation.spl
+│   └── 06_high_volume_bruteforce_detection.spl
+├── screenshots/                         # Verifiable visual evidence assets
+│   ├── banner.png
+│   ├── dashboard-overview-1.png
+│   ├── dashboard-overview-2.png
+│   ├── dashboard-panel-01.jpeg through 05.jpeg
+│   ├── lab-architecture.jpg
+│   ├── soc-dashboard.jpeg
+│   ├── splunk-home.png
+│   ├── splunk-startup.png
+│   └── splunk-status.png
+├── build_pdf.py                         # Python script for compiling PDF reports
+├── Log_Analysis_Report.md               # 10-section comprehensive SOC analysis report
+├── Log_Analysis_Report.pdf              # Compiled executive-ready PDF deliverable
+└── README.md                            # Main project documentation
+```
+
+---
+
+## 15. Implementation Status Breakdown
+
+| Capability / Milestone | Status | Notes |
+|---|:---:|---|
+| **Splunk Enterprise Deployment** | ✅ **IMPLEMENTED** | Verified running on Kali Linux (`http://localhost:8000`). |
+| **SSH Log Dataset Ingestion** | ✅ **IMPLEMENTED** | 1,200 structured events ingested into `index=main`. |
+| **SPL Threat Hunting Library** | ✅ **IMPLEMENTED** | 6 documented, modular `.spl` queries under `queries/`. |
+| **Brute-Force & Probe Analysis** | ✅ **IMPLEMENTED** | Isolated top threat actor IPs and target servers. |
+| **Multi-Stage Event Correlation** | ✅ **IMPLEMENTED** | Identified failed-to-success session progression. |
+| **5-Panel SOC Dashboard** | ✅ **IMPLEMENTED** | Built, validated, and visually documented. |
+| **Comprehensive SOC Report** | ✅ **IMPLEMENTED** | Available in both Markdown and compiled PDF. |
+| **SIEM Alert Logic** | 🟡 **PARTIALLY IMPLEMENTED** | Defined in SPL; automated email/script actions planned. |
+| **Splunk Universal Forwarder** | ⚪ **NOT YET IMPLEMENTED** | Documented in `configs/`; planned for P2/P3. |
+| **Live Windows / Linux Endpoints** | ⚪ **NOT YET IMPLEMENTED** | Planned for dedicated project milestones (P2 & P3). |
+
+---
+
+## 16. Future Enhancements
+
+- **Universal Forwarder Deployment:** Transition from batch JSON upload to real-time endpoint streaming over encrypted port 9997 (Project P2 & P3).
+- **Windows Security Telemetry:** Ingest Sysmon and Windows Security Event Logs (Event IDs 4624, 4625) for credential attack analysis (Project P2).
+- **Automated SOAR Integration:** Connect alert outputs to automated mitigation scripts (e.g., dynamic IP blocking via iptables / firewall APIs).
+- **Threat Intelligence Enrichment:** Automate IP reputation lookups using AbuseIPDB and VirusTotal via Splunk lookup tables.
+
+---
+
+## 17. Lessons Learned
+
+- **Value of Structured Logging:** JSON-formatted network telemetry dramatically simplifies field extraction compared to unformatted syslog, eliminating brittle regex operations.
+- **Statistical Filtering is Essential:** Raw event volume can overwhelm analysts; applying statistical thresholds (`where failed_attempts > 5`) is critical to isolate deliberate adversary attacks from ordinary user typos.
+- **Transaction Correlation Unveils Intent:** Isolated failed logins only show attempts; correlating failures leading to successful logins reveals potential account compromise.
+
+---
+
+## 18. Master Portfolio Navigation
+
+This project is part of a complete 10-part SOC & Threat Hunting Portfolio:
+
+| Milestone | Project Title | Repository Link | Status |
+|:---:|---|:---:|:---:|
+| **P1** | **Splunk SOC Home Lab & Log Analysis** | *Current Repository* | 🟡 In Progress |
+| **P2** | **Windows Security Monitoring** | [Master Hub](https://github.com/NATTOMR/splunk-soc-threat-hunting-lab) | ⚪ Planned |
+| **P3** | **Linux Security Monitoring** | [Master Hub](https://github.com/NATTOMR/splunk-soc-threat-hunting-lab) | ⚪ Planned |
+| **P4** | **Brute-Force Detection & Investigation** | [Master Hub](https://github.com/NATTOMR/splunk-soc-threat-hunting-lab) | ⚪ Planned |
+| **P5** | **Network Threat Detection** | [Master Hub](https://github.com/NATTOMR/splunk-soc-threat-hunting-lab) | ⚪ Planned |
+| **P6** | **Web Attack Detection** | [Master Hub](https://github.com/NATTOMR/splunk-soc-threat-hunting-lab) | ⚪ Planned |
+| **P7** | **Phishing Email Investigation** | [Master Hub](https://github.com/NATTOMR/splunk-soc-threat-hunting-lab) | ⚪ Planned |
+| **P8** | **MITRE ATT&CK Threat Hunting** | [Master Hub](https://github.com/NATTOMR/splunk-soc-threat-hunting-lab) | ⚪ Planned |
+| **P9** | **Splunk SOC Dashboard** | [Master Hub](https://github.com/NATTOMR/splunk-soc-threat-hunting-lab) | ⚪ Planned |
+| **P10** | **Wazuh + Splunk SIEM Integration** | [Master Hub](https://github.com/NATTOMR/splunk-soc-threat-hunting-lab) | ⚪ Planned |
+
+👉 **Explore the Master Hub:** [NATTOMR/splunk-soc-threat-hunting-lab](https://github.com/NATTOMR/splunk-soc-threat-hunting-lab)

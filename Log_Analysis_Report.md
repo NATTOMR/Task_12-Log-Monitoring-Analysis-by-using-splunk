@@ -1,7 +1,7 @@
 # 🛡️ SOC Log Monitoring & Incident Detection Analysis Report
 **Task 12: Cybersecurity Internship Deliverable**  
 **SIEM Platform:** Splunk Enterprise 9.2.4 on Kali Linux  
-**Log Dataset Analyzed:** `ssh_logs (1).json` (1,200 Connection & Authentication Events)  
+**Log Dataset Analyzed:** `data/ssh_logs.json` (1,200 Connection & Authentication Events)  
 **Date:** August 28, 2026
 
 ---
@@ -32,13 +32,13 @@ This report documents a comprehensive log monitoring, SIEM analysis, and threat 
 
 The monitoring infrastructure was deployed using Splunk Enterprise on a Kali Linux SOC analyst workstation. The system topology ingests log feeds from target endpoints, processes sourcetypes, indexes event timestamps, and renders dashboards.
 
-![Lab Architecture](Lab_Architecture.jpg)
+![Lab Architecture](screenshots/lab-architecture.jpg)
 
 ### Architecture Layer Breakdown:
 
 | Infrastructure Layer | Component Specification | Functional Role in SOC Workflow |
 | :--- | :--- | :--- |
-| **Endpoint Telemetry** | Linux Hosts (`auth.log`) / `ssh_logs (1).json` | Generates real-time SSH authentication and TCP session logs |
+| **Endpoint Telemetry** | Linux Hosts (`auth.log`) / `data/ssh_logs.json` | Generates real-time SSH authentication and TCP session logs |
 | **Ingestion Engine** | Splunk Enterprise (`v9.2.4`) on Kali Linux | Parses JSON key-value pairs, indexes timestamps into `index=main` |
 | **SIEM Processing** | Search Processing Language (SPL) | Executes anomaly detection, event correlation, and alerting logic |
 | **SOC Visualization** | Splunk Web Interface (`http://localhost:8000`) | Renders executive security dashboards, threat maps, and alerts |
@@ -48,13 +48,13 @@ The monitoring infrastructure was deployed using Splunk Enterprise on a Kali Lin
 - **SIEM Engine:** Splunk Enterprise `v9.2.4`
 - **Web Interface Endpoint:** `http://localhost:8000`
 - **Installation Directory:** `/opt/splunk`
-- **Target Ingested Log Source:** `ssh_logs (1).json`
+- **Target Ingested Log Source:** `data/ssh_logs.json`
 
 ---
 
 ## 3. Log Ingestion & Data Model Analysis
 
-The dataset `ssh_logs (1).json` contains high-density network and authentication telemetry. Splunk ingested these events into `index=main` under structured JSON key-value pairs.
+The dataset `data/ssh_logs.json` contains high-density network and authentication telemetry. Splunk ingested these events into `index=main` under structured JSON key-value pairs.
 
 ### Key Event Fields Extracted:
 | Field Name | Type | Description | Example Value |
@@ -171,7 +171,7 @@ Based on log correlations, two major security incident patterns were identified 
 
 To visualize security telemetry for real-time monitoring, a dedicated **Kali Security Dashboard** was configured in Splunk.
 
-![Splunk Security Dashboard](images/splunk_security_dashboard.jpeg)
+![Splunk Security Dashboard](screenshots/soc-dashboard.jpeg)
 
 ### Visual Dashboard Panels:
 

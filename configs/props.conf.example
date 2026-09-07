@@ -1,0 +1,23 @@
+# ==============================================================================
+# File: configs/props.conf.example
+# Project: P1 — Splunk SOC Home Lab & Log Analysis
+# Purpose: Sample parsing and sourcetype configuration for JSON & SSH log feeds
+# Status: REFERENCE / EXAMPLE ONLY
+# Note: The current P1 project utilizes built-in _json sourcetype parsing.
+# ==============================================================================
+
+[_json]
+# Built-in Splunk JSON parsing stanza
+INDEXED_EXTRACTIONS = json
+KV_MODE = none
+AUTO_KV_JSON = true
+TIMESTAMP_FIELDS = ts
+TIME_FORMAT = %Y-%m-%dT%H:%M:%S.%6NZ
+TRUNCATE = 100000
+
+[linux_secure]
+# Standard Linux authentication log parsing stanza
+MAX_TIMESTAMP_LOOKAHEAD = 32
+TIME_FORMAT = %b %d %H:%M:%S
+LINE_BREAKER = ([\r\n]+)
+SHOULD_LINEMERGE = false

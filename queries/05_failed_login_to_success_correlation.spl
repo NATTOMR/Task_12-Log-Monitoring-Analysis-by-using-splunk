@@ -1,0 +1,17 @@
+# ==============================================================================
+# Query Name: 05_failed_login_to_success_correlation.spl
+# Project: P1 — Splunk SOC Home Lab & Log Analysis
+# Purpose: Correlate failed logins followed by successful access within a time window
+# Security Use Case: High-severity detection of successful account compromise via password guessing
+# ==============================================================================
+
+index=main 
+| transaction id.orig_h maxspan=15m 
+| search auth_success=true AND (event_type="Failed SSH Login" OR event_type="Multiple Failed Authentication Attempts")
+| table _time, id.orig_h, id.resp_h, duration, eventcount
+
+# Expected Interpretation:
+# - Groups events from the same source IP within a 15-minute sliding window.
+# - Filters for sessions where failures occurred AND ultimately resulted in a successful login.
+# - Represents a Critical/P1 SOC incident: likely credential discovery / compromised account.
+# - Analysts must prioritize immediate host isolation and credential rotation.

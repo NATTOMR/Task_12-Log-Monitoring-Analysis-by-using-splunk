@@ -1,0 +1,15 @@
+# ==============================================================================
+# Query Name: 03_target_server_exposure.spl
+# Project: P1 — Splunk SOC Home Lab & Log Analysis
+# Purpose: Target server exposure and connection volume
+# Security Use Case: Asset criticality assessment and target identification in SOC environments
+# ==============================================================================
+
+index=main 
+| stats count by id.resp_h, id.resp_p 
+| sort - count
+
+# Expected Interpretation:
+# - Maps inbound connection density across internal server assets and listening ports.
+# - Identifies primary victim machines (e.g., 10.0.1.6, 10.0.1.2) under active attack.
+# - Highlights port exposure (e.g., port 22/tcp) across the monitored network perimeter.

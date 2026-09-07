@@ -1,0 +1,16 @@
+# ==============================================================================
+# Query Name: 04_unauthenticated_ssh_probes.spl
+# Project: P1 — Splunk SOC Home Lab & Log Analysis
+# Purpose: Detect unauthenticated port 22 probes and banner grabs
+# Security Use Case: Reconnaissance and port scanning detection
+# ==============================================================================
+
+index=main event_type="Connection Without Authentication"
+| stats count by id.orig_h, id.resp_h
+| sort - count
+
+# Expected Interpretation:
+# - Captures connections that establish a TCP handshake on port 22 but terminate
+#   prior to any SSH authentication attempt.
+# - Signals automated port scanning tools (Nmap, Masscan, ZMap) or SSH banner grabbing
+#   during adversary initial reconnaissance.

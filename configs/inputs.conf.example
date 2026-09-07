@@ -1,0 +1,26 @@
+# ==============================================================================
+# File: configs/inputs.conf.example
+# Project: P1 — Splunk SOC Home Lab & Log Analysis
+# Purpose: Sample inputs configuration for Splunk Universal Forwarder / Receiver
+# Status: REFERENCE / EXAMPLE ONLY
+# Note: The current P1 project utilizes direct JSON upload in Splunk Web.
+#       Live forwarder deployment is planned for future lab iterations (P2/P3).
+# ==============================================================================
+
+# [RECEIVER CONFIGURATION - Splunk Enterprise Indexer]
+# Uncomment on the central Splunk Enterprise instance to listen for forwarders
+# [splunktcp://9997]
+# disabled = 0
+
+# [FORWARDER CONFIGURATION - Linux Endpoint Agent]
+# Monitor system authentication log feed
+[monitor:///var/log/auth.log]
+disabled = false
+index = main
+sourcetype = linux_secure
+
+# Monitor dedicated SSH JSON telemetry feed
+[monitor:///var/log/ssh/ssh_logs.json]
+disabled = false
+index = main
+sourcetype = _json
