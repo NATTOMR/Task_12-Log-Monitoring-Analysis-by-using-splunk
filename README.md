@@ -276,7 +276,7 @@ Based on the forensic analysis, the following host and network defenses are reco
 ## 14. Project Structure
 
 ```text
-Log-Monitoring-Analysis-by-using-splunk/
+splunk-p1-soc-home-lab/
 ├── configs/                             # Configuration templates
 │   ├── inputs.conf.example              # Sample Universal Forwarder input stanzas
 │   └── props.conf.example               # Sample JSON and Linux log parsing rules
